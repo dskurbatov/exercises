@@ -6,7 +6,7 @@ const extractSCSS = new ExtractTextPlugin('[name].[md5:contenthash:hex:20].css')
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: 'App.js'
   },
   output: {
     filename: '[name].[hash].js',
