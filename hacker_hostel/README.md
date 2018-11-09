@@ -28,8 +28,8 @@ If the user enters an invalid stay duration, the application renders menus for t
 An error message for a hacker must read: Error! No menu generated for insert_hacker_name
 Component flow diagram of the application is as follows:
 
+BOOKING -> APP <- MEALS and ERROR -> APP
 
- 
 
 Framework Specific Instructions
 The project uses React 16 by default. Changing the React version may interfere with tests and is strictly discouraged. You may refer to the React 16 docs here.
