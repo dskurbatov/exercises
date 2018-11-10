@@ -31,7 +31,7 @@ class Bookings extends Component {
 			if(item){
 				return item.split(' to ')
 			} else {
-				return item
+				return []
 			}
 		})
 		return this.setState({
