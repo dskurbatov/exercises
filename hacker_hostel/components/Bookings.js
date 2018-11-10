@@ -8,8 +8,8 @@ class Bookings extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-				names: [],
-				dates: []
+			names: [],
+			dates: []
 		}
 		
 		this.updateNames = this.updateNames.bind(this)
@@ -28,7 +28,7 @@ class Bookings extends Component {
 	updateDates(e) {
 		const dates = e.target.value.split('\n')
 		return this.setState({
-				dates
+			dates
 		})
 	}
 	

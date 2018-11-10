@@ -8,7 +8,7 @@ class App extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-				hackers: []
+			hackers: []
 		}	
 		
 		this.handleClick = this.handleClick.bind(this)
@@ -20,7 +20,7 @@ class App extends Component {
 		for(let i = 0; i < len; i++){
 			hackers[i] = {
 				name: names[i],
-				date: dates[i]
+				date: dates[i].split(' to ')
 			}
 		}
 		return this.setState({
@@ -35,8 +35,16 @@ class App extends Component {
 			</center>
 			<div className="container">
 				<Bookings handleClick={this.handleClick}></Bookings>
-				<Error></Error>
-				<Meals></Meals>
+				{
+					this.state.hackers.filter(({ date }) => {
+						return date.length === 0 || new Date(date[1]) - new Date(date[0]) < 0 
+					}).map(({ name }, idx) => <Error key={idx} name={name}></Error>)
+				}
+				{
+					this.state.hackers.filter(({ date }) => {
+						return date.length > 0 && new Date(date[1]) - new Date(date[0]) > 0
+					}).map(({ name }, idx) => <Meals key={idx} name={name}></Meals>)
+				}
 			</div>
 		</div>);
 	}
