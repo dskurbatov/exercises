@@ -10,8 +10,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "scripts": {
-    "prestart": "npm install",
+  "scripts": { 
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "test": ""
