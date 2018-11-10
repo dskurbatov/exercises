@@ -18,10 +18,10 @@ class App extends Component {
 		const len = names.length
 		const hackers = Array(len).fill(null)
 		for(let i = 0; i < len; i++){
-			hackers.push({
+			hackers[i] = {
 				name: names[i],
 				date: dates[i]
-			})
+			}
 		}
 		return this.setState({
 			hackers
