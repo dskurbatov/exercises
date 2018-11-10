@@ -26,7 +26,14 @@ class Bookings extends Component {
 
 	
 	updateDates(e) {
-		const dates = e.target.value.split('\n')
+		const input = e.target.value.split('\n')
+		const dates = input.map((item) => {
+			if(item){
+				return item.split(' to ')
+			} else {
+				return item
+			}
+		})
 		return this.setState({
 			dates
 		})
