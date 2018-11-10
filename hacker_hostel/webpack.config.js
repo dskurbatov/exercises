@@ -6,7 +6,7 @@ const extractSCSS = new ExtractTextPlugin('[name].[md5:contenthash:hex:20].css')
 
 module.exports = {
   entry: {
-    app: 'App.js'
+    app: './public/index.js'
   },
   output: {
     filename: '[name].[hash].js',
@@ -51,7 +51,7 @@ module.exports = {
   plugins: [
     extractSCSS,
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './public/index.html'
     }),
     new webpack.HotModuleReplacementPlugin()
   ]
