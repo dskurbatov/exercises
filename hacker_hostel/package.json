@@ -6,11 +6,12 @@
     "@material-ui/core": "^1.5.0",
     "@material-ui/icons": "^2.0.2",
     "eslint": "^5.4.0",
+    "lodash.debounce": "^4.0.8",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "scripts": { 
+  "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "test": ""

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import debounce from 'lodash.debounce'
 
 class Bookings extends Component {
 	constructor(props){
@@ -19,9 +20,10 @@ class Bookings extends Component {
 	updateNames(e) {
 		const names = e.target.value.split('\n');
 		return this.setState({
-				names
-		});
+			names
+		});		
 	}
+
 	
 	updateDates(e) {
 		const dates = e.target.value.split('\n')
