@@ -66,4 +66,8 @@ class Bookings extends Component {
 	}
 }
 
+Bookings.propTypes = {
+	onClick: PropTypes.func
+}
+
 export default Bookings;

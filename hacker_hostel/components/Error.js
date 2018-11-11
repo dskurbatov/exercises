@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 
 const Error = (({ name }) => {
 	return (
-		<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 error">
+		<div className="error">
 			<div id="list">
 				<div className="error-msg">
 					<i className="fa fa-times-circle"></i>
@@ -12,5 +12,9 @@ const Error = (({ name }) => {
 			</div>
 		</div>);
 });
+
+Error.propTypes = {
+	name: PropTypes.string
+}
 
 export default Error;

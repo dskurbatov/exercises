@@ -11,4 +11,9 @@ const Meals = (({name, date}) => {
   )
 })
 
+Meals.propTypes = {
+  name: PropTypes.string,
+  date: PropTypes.string
+}
+
 export default Meals
