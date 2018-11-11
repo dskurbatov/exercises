@@ -20,27 +20,39 @@ class App extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			hackers: []
+			hackers: [],
+			errors: []
 		}	
 		
 		this.handleClick = this.handleClick.bind(this)
 	}
 
 	handleClick(names, dates){
-		const len = names.length
-		const hackers = Array(len).fill(null)
-		for(let i = 0; i < len; i++){
-			hackers[i] = {
-				name: names[i],
-				date: dates[i]
+		const hackers = []
+		const errors = []
+		let name = null, date = null
+		for(let i = 0, len = names.length; i < len; i++){
+			name = names[i]
+			date = dates[i]
+			if(date.length > 0 && isValidDateAndRange(...date)){
+				hackers.push({
+					name,
+					date
+				})
+			} else {
+				errors.push({
+					name
+				})
 			}
 		}
 		return this.setState({
-			hackers
+			hackers,
+			errors
 		})
 	}
 	
 	render() {
+		const { hackers, errors } = this.state
 		return (<div className="container-fluid">
 			<center>
 				<h2>Hacker Hostel</h2>
@@ -48,14 +60,10 @@ class App extends Component {
 			<div className="container">
 				<Bookings handleClick={this.handleClick}></Bookings>
 				{
-					this.state.hackers.filter(({ date }) => {
-						return date.length === 0 || !isValidDateAndRange(date[0], date[1])
-					}).map(({ name }, idx) => <Error key={idx} name={name}></Error>)
+					errors.map(({ name }, idx) => <Error key={idx} name={name}></Error>)
 				}
 				{
-					this.state.hackers.filter(({ date }) => {
-						return date.length > 0 && isValidDateAndRange(date[0], date[1])
-					}).map(({name, date}) => <ListOfMeals name={name} date={date}></ListOfMeals>)
+					hackers.map(({ name, date }, idx) => <ListOfMeals key={idx} name={name} date={date}></ListOfMeals>)
 				}
 			</div>
 		</div>);
