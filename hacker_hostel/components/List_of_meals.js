@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 import Meals from './Meals'
 import DateIterator from '../helpers/date_iterator'
@@ -23,4 +23,10 @@ const ListOFMeals = (({ name, date }) => {
 			</ol>
 		</div>);
 });
+
+ListOFMeals.propTypes = {
+	name: PropTypes.string,
+	date: PropTypes.string
+}
+
 export default ListOFMeals;
