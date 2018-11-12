@@ -1,20 +1,8 @@
 import React, {Component} from 'react';
 import Bookings from './components/Bookings';
 import ListOfMeals from './components/List_of_meals';
+import isValidDateAndRange from './helpers/date_validater'
 import Error from './components/Error';
-import './index.css'
-
-function isValidDate(str) {
-	const d = new Date(str)
-  return d instanceof Date && !isNaN(d);
-}
-
-function isValidDateAndRange(str1, str2){
-	if(isValidDate(str1) && isValidDate(str2)){
-		return str2 > str1
-	}
-	return false
-}
 
 class App extends Component {
 	constructor(props){
@@ -53,7 +41,8 @@ class App extends Component {
 	
 	render() {
 		const { hackers, errors } = this.state
-		return (<div className="container-fluid">
+		return (
+		<div className="container-fluid">
 			<center>
 				<h2>Hacker Hostel</h2>
 			</center>
