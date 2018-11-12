@@ -3,6 +3,7 @@ import {PropTypes} from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import debounce from 'lodash.debounce'
+import stringToArray from '../helpers/string_to_array'
 
 class Bookings extends Component {
 	constructor(props){
@@ -16,26 +17,37 @@ class Bookings extends Component {
 		this.updateDates = this.updateDates.bind(this)
 		this.onClick = this.onClick.bind(this)
 	}
+
+	debounced(func, delay){
+		const f = debounce(func, delay)
+		return e => {
+			e.persist()
+			return f(e)
+		}
+	}
 	
 	updateNames(e) {
-		const names = e.target.value.split('\n');
 		return this.setState({
-			names
+			names: stringToArray(e.target.value, (name) => {
+				if(name){
+					return name
+				} else {
+					return null
+				}
+			})
 		});		
 	}
 
 	
 	updateDates(e) {
-		const input = e.target.value.split('\n')
-		const dates = input.map((item) => {
-			if(item){
-				return item.split(' to ')
-			} else {
-				return []
-			}
-		})
 		return this.setState({
-			dates
+			dates: stringToArray(e.target.value, (date) => {
+				if(date){
+					return date.split(' to ')
+				} else {
+					return []
+				}
+			})
 		})
 	}
 	
@@ -52,14 +64,14 @@ class Bookings extends Component {
 				multiline
 				rows="4"
 				placeholder="Enter the hacker list (one hacker per line)"
-				onChange={this.updateNames}
+				onChange={this.debounced(this.updateNames, 500)}
 			/>
 			<TextField
 				className="col-md-6"
 				multiline
 				rows="4"
 				placeholder="Enter the date range for each hacker's stay (one range per line)"
-				onChange={this.updateDates}
+				onChange={this.debounced(this.updateDates, 1000)}
 			/>
 			<Button variant="outlined" color="primary" className="block-center" onClick={this.onClick}>Get Meals Schedule</Button>
 		</div>);
