@@ -26,7 +26,7 @@ const ListOFMeals = (({ name, date }) => {
 
 ListOFMeals.propTypes = {
 	name: PropTypes.string,
-	date: PropTypes.string
+	date: PropTypes.array
 }
 
 export default ListOFMeals;
