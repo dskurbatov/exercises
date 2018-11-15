@@ -1,27 +1,29 @@
+//input array
+//output array
 function isDateValid(array){
 	const currentYear = new Date().getFullYear()
 	if(array.length !== 3){
-		return false
+		return []
 	}
 
 	const isEvery = array.every(item => !isNaN(item))
 	if(!isEvery) {
-		return false
+		return []
 	}
 	
 	const [year, month, date] = array
 	if(year.length !== 4 || +year < currentYear){
-		return false
+		return []
 	}
 	
 	if(month.length !== 2 || +month > 12){
-		return false
+		return []
 	}
 	
 	if(date.length !== 2 || +date > 31){
-		return false
+		return []
 	}
-	return true
+	return array
 }
 
 export default isDateValid
