@@ -3,7 +3,16 @@ import {PropTypes} from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import debounce from 'lodash.debounce'
-import stringToArray from '../helpers/string_to_array'
+import getRange from '../helpers/generateRange'
+import validate from '../helpers/date_validater'
+
+function pipe(...func){
+	return (value) => {
+		return func.reduce((value, fn) => fn(value), value)
+	}
+}
+
+const splitIntoRange = pipe(validate, getRange)
 
 class Bookings extends Component {
 	constructor(props){
@@ -18,6 +27,10 @@ class Bookings extends Component {
 		this.onClick = this.onClick.bind(this)
 	}
 
+	componentDidUpdate(){
+		console.log(this.state.names, this.state.dates.map(date => date.split(' to ')))
+	}
+
 	debounced(func, delay){
 		const f = debounce(func, delay)
 		return e => {
@@ -27,33 +40,26 @@ class Bookings extends Component {
 	}
 	
 	updateNames(e) {
+		const names = e.target.value.split('\n')
 		return this.setState({
-			names: stringToArray(e.target.value, (name) => {
-				if(name){
-					return name
-				} else {
-					return null
-				}
-			})
+			names
 		});		
 	}
 
-	
+	//rewrite function so that dates property is range of dates provided	
+	//check if input is valid range othewise return empty array
 	updateDates(e) {
+		const dates = e.target.value.split('\n')
 		return this.setState({
-			dates: stringToArray(e.target.value, (date) => {
-				if(date){
-					return date.split(' to ')
-				} else {
-					return []
-				}
-			})
+			dates 
 		})
 	}
 	
+	//should return names as array of strings and dates as array of arrays
 	onClick(){
 		const { names, dates } = this.state
-		return this.props.handleClick(names, dates)
+		const splitDates = splitIntoRange(dates)
+		return this.props.handleClick(names, splitDates)
 	}
 
 	render() {
