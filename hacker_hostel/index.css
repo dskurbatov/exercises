@@ -4,16 +4,27 @@
   justify-content: space-around;
   align-items: center;
 }
-.col-md-6 {
+.col-md-6, .block-center {
   width: 30%;
 }
 
-.error{
-  margin: 10px 0;
-  width: 50%;
+.error {
+  margin: 20px;
+}
+
+.error-msg{
   border: 2px solid red;
-  color: red;
-  text-align: center;
+  color: rgb(184, 4, 4);
+  border-radius: 5px;
+  background-color: #ff9ba0;
+}
+
+.container {
+  width: 100%;
+}
+p {
+  margin: 0;
+  padding: 5px 10px;
 }
 
 li {
