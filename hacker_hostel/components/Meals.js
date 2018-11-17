@@ -1,27 +1,33 @@
 import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 
-const Meals = (({ calendar }) => {
-  //const dates = Object.keys(calendar).sort(sortAlphabet)
-  const sortedDates = Object.keys(calendar)
-  const result = []
-  let date = null
-  for(let i = 0, len = sortedDates.length; i < len; i++){
-    date = sortedDates[i]
-    result.push(calendar[date].map(name => <li className="morning">{`Breakfast for ${name} on ${date}`}</li>))
-    result.push(calendar[date].map(name => <li className="afternoon">{`Lunch for ${name} on ${date}`}</li>))
-    result.push(calendar[date].map(name => <li className="night">{`Dinner for ${name} on ${date}`}</li>))
+//sorting numeric strings
+function sortAlphabet(str1, str2){
+  const options = {
+    numeric: true
   }
+  return str1.localeCompare(str2, undefined, options)
+}
+
+//get a meal
+function getMeal(date, names, type){
+  return names.map(name => <li key={date+name+type}>{`${type} for ${name} on ${date}`}</li>)
+}
+
+//get DailyMeals
+function getDailyMeals(date, names){
+  return ['Breakfast', 'Lunch', 'Dinner'].map(type => getMeal(date, names, type))
+}
+
+const Meals = (({ calendar }) => {
+  const sortedDates = Object.keys(calendar).sort(sortAlphabet)
   return(
-    <div>
-      {result}
-		</div>
+    <ol>
+      {sortedDates.map(date => getDailyMeals(date, calendar[date]))}
+		</ol>
   )
 })
 
-//<li className="morning">{`Breakfast for ${name} on ${date}`}</li>
-//<li className="afternoon">{`Lunch for ${name} on ${date}`}</li>
-//<li className="night">{`Dinner for ${name} on ${date}`}</li>
 Meals.propTypes = {
   calendar: PropTypes.object
 }
