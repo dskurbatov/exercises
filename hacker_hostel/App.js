@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import Bookings from './components/Bookings';
-import ListOfMeals from './components/List_of_meals';
-import isValidDateAndRange from './helpers/date_validater'
 import Error from './components/Error';
+import Meals from './components/Meals'
+
+function setCalendar(range, name, calendar){
+	range.forEach(item => {
+		if(!calendar[item]){
+			calendar[item] = []
+		}
+		calendar[item].push(name)
+	})
+}
 
 class App extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			hackers: [],
+			calendar: {},
 			errors: []
 		}	
 		
@@ -16,25 +24,21 @@ class App extends Component {
 	}
 
 	handleClick(names, dates){
-		const hackers = []
 		const errors = []
-		let name = null, date = null
+		const calendar = {}
 		for(let i = 0, len = names.length; i < len; i++){
-			name = names[i]
-			date = dates[i]
-			if(date.length > 0 && isValidDateAndRange(...date)){
-				hackers.push({
-					name,
-					date
-				})
+			if(names[i].length === 0){
+				continue
+			}
+
+			if(dates[i].length > 0){
+				setCalendar(dates[i], names[i], calendar)
 			} else {
-				errors.push({
-					name
-				})
+				errors.push(names[i])
 			}
 		}
 		return this.setState({
-			hackers,
+			calendar,
 			errors
 		})
 	}
@@ -49,11 +53,9 @@ class App extends Component {
 			<div className="container">
 				<Bookings handleClick={this.handleClick}></Bookings>
 				{
-					errors.map(({ name }, idx) => <Error key={idx} name={name}></Error>)
+					errors.map((name, idx) => <Error key={idx} name={name}></Error>)
 				}
-				{
-					hackers.map(({ name, date }, idx) => <ListOfMeals key={idx} name={name} date={date}></ListOfMeals>)
-				}
+				<Meals calendar={this.state.calendar}></Meals>
 			</div>
 		</div>);
 	}
