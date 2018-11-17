@@ -27,10 +27,6 @@ class Bookings extends Component {
 		this.onClick = this.onClick.bind(this)
 	}
 
-	componentDidUpdate(){
-		console.log(this.state.names, this.state.dates.map(date => date.split(' to ')))
-	}
-
 	debounced(func, delay){
 		const f = debounce(func, delay)
 		return e => {
