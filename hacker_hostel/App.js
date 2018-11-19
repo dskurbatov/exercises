@@ -4,12 +4,17 @@ import Error from './components/Error';
 import Meals from './components/Meals'
 
 function setCalendar(range, name, calendar){
-	range.forEach(item => {
-		if(!calendar[item]){
-			calendar[item] = []
+	const after = Object.assign({}, calendar)
+	return range.reduce((acc, date) => {
+		if(!acc[date]){
+			acc[date] = []
 		}
-		calendar[item].push(name)
-	})
+		acc[date] = [
+			...acc[date],
+			name
+		]
+		return acc
+	}, after)
 }
 
 class App extends Component {
@@ -25,14 +30,14 @@ class App extends Component {
 
 	handleClick(names, dates){
 		const errors = []
-		const calendar = {}
+		let calendar = {}
 		for(let i = 0, len = names.length; i < len; i++){
 			if(names[i].length === 0){
 				continue
 			}
 
 			if(dates[i].length > 0){
-				setCalendar(dates[i], names[i], calendar)
+				calendar = setCalendar(dates[i], names[i], calendar)
 			} else {
 				errors.push(names[i])
 			}

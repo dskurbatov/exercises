@@ -1,6 +1,20 @@
 import validate, { isDateValid } from './date_validater'
 import getRange, { generateRange } from './generateRange'
 
+function setCalendar(range, name, calendar){
+	const after = Object.assign({}, calendar)
+	return range.reduce((acc, date) => {
+		if(!acc[date]){
+			acc[date] = []
+		}
+		acc[date] = [
+			...acc[date],
+			name
+		]
+		return acc
+	}, after)
+}
+
 describe('isDateValid', () => {
 	test('should return empty array when not formated corretly date is passed', () => {
 		const array = isDateValid('touch')
@@ -42,6 +56,22 @@ describe('generateRange',() => {
 	it('returns empty array if dates are not in range', () => {
 		const range = generateRange(['2018', '09', '13'], ['2018', '09', '11'])
 		expect(range).toEqual([])
+	})
+})
+
+describe('setCalendar', () => {
+	it('returns new object', () => {
+		const before = {
+			'2018-9-13': ['anton']
+		}
+		const after = setCalendar(['2018-9-13', '2018-9-14'], 'john', before)
+		expect(before).toEqual({
+			'2018-9-13': ['anton']
+		})
+		expect(after).toEqual({
+			'2018-9-13': ['anton', 'john'],
+			'2018-9-14': ['john']
+		})
 	})
 })
 
