@@ -1,19 +1,6 @@
 import validate, { isDateValid } from './date_validater'
 import getRange, { generateRange } from './generateRange'
-
-function setCalendar(range, name, calendar){
-	const after = Object.assign({}, calendar)
-	return range.reduce((acc, date) => {
-		if(!acc[date]){
-			acc[date] = []
-		}
-		acc[date] = [
-			...acc[date],
-			name
-		]
-		return acc
-	}, after)
-}
+import setCalendar from './setCalendar'
 
 describe('isDateValid', () => {
 	test('should return empty array when not formated corretly date is passed', () => {

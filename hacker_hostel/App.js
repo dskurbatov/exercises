@@ -2,20 +2,7 @@ import React, {Component} from 'react';
 import Bookings from './components/Bookings';
 import Error from './components/Error';
 import Meals from './components/Meals'
-
-function setCalendar(range, name, calendar){
-	const after = Object.assign({}, calendar)
-	return range.reduce((acc, date) => {
-		if(!acc[date]){
-			acc[date] = []
-		}
-		acc[date] = [
-			...acc[date],
-			name
-		]
-		return acc
-	}, after)
-}
+import setCalendar from './helpers/setCalendar'
 
 class App extends Component {
 	constructor(props){
