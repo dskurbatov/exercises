@@ -62,7 +62,6 @@ describe('setCalendar', () => {
 	})
 })
 
-
 // assert(1, false, dateFormate(["2018","to", "12"]), 'should return false if date string contains not a number')
 // assert(2, false, dateFormate(["2017","11","12"]), 'should return false if year is less than current year')
 // assert(3, false, dateFormate(["2018","9", "12"]), 'should return false if month is present as one digit')
