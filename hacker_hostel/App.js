@@ -19,11 +19,11 @@ class App extends Component {
 		const errors = []
 		let calendar = {}
 		for(let i = 0, len = names.length; i < len; i++){
-			if(names[i].length === 0){
+			if(names[i] === 'undefined' || names[i].length === 0){
 				continue
 			}
 
-			if(dates[i].length > 0){
+			if(dates[i] && dates[i].length > 0){
 				calendar = setCalendar(dates[i], names[i], calendar)
 			} else {
 				errors.push(names[i])
@@ -36,7 +36,7 @@ class App extends Component {
 	}
 	
 	render() {
-		const { hackers, errors } = this.state
+		const { calendar, errors } = this.state
 		return (
 		<div className="container-fluid">
 			<center>
@@ -47,7 +47,7 @@ class App extends Component {
 				{
 					errors.map((name, idx) => <Error key={idx} name={name}></Error>)
 				}
-				<Meals calendar={this.state.calendar}></Meals>
+				<Meals calendar={calendar}></Meals>
 			</div>
 		</div>);
 	}
