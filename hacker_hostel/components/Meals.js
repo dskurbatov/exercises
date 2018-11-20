@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
+import getDailyMeals from '../helpers/getDailyMeals'
 
 //sorting numeric strings
 function sortAlphabet(str1, str2){
@@ -7,16 +8,6 @@ function sortAlphabet(str1, str2){
     numeric: true
   }
   return str1.localeCompare(str2, undefined, options)
-}
-
-//get a meal
-function getMeal(date, names, type){
-  return names.map(name => <li key={date+name+type}>{`${type} for ${name} on ${date}`}</li>)
-}
-
-//get DailyMeals
-function getDailyMeals(date, names){
-  return ['Breakfast', 'Lunch', 'Dinner'].map(type => getMeal(date, names, type))
 }
 
 const Meals = (({ calendar }) => {
