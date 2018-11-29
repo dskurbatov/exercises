@@ -14,11 +14,27 @@ function assertEqual(number, actual, expected, testName){
   console.log(number, message)
 }
 
-function findNonZero(arr, start, length){
-  while(start < length && arr[start] === 0){
-    start++
+class FixedSizeQueue {
+  constructor(size){
+    this.arr = []
+    this.size = 0
+    this.current = 0
   }
-  return start
+
+  isEmpty(){
+    return this.size === 0
+  }
+
+  pop(){
+    const val = this.arr[this.current]
+    this.current++
+    return val
+  }
+
+  push(item){
+    this.arr[this.size] = item
+    this.size++
+  }
 }
 
 function swap(arr, idx1, idx2){
@@ -28,16 +44,15 @@ function swap(arr, idx1, idx2){
 }
 
 function shift(arr){
-  let i = 0, len = arr.length, j = null
-  while(i < len){
+  const len = arr.length
+  const q = new FixedSizeQueue(len)
+  for(let i = 0; i < len; i++){
+    if(arr[i] !== 0 && !q.isEmpty()){
+      swap(arr, i, q.pop())
+    } 
+    
     if(arr[i] === 0){
-      j = findNonZero(arr, i + 1, len)
-      if(j < len){
-        swap(arr, i, j)
-      }
-      i = j
-    } else {
-      i++
+      q.push(i)
     }
   }
   return arr
@@ -48,3 +63,5 @@ assertEqual(1, [], shift([]), 'Should return array')
 assertEqual(2, [1,2,3,0,0,0], shift([1,0,2,0,3,0]), 'Should shift all zeroes to the right')
 assertEqual(3, [1,2,3,0,0,0], shift([1,2,3,0,0,0]), 'Should not modified array if all zeroes on the right')
 assertEqual(4, [1,2,0,0,0,0], shift([1,0,2,0,0,0]), 'Should modified array')
+assertEqual(5, [1,2,3,0,0,0], shift([0,0,0,1,2,3]), 'Should modified array')
+assertEqual(6, [1,0,0,0,0,0], shift([0,0,0,0,0,1]), 'Should modified array')
