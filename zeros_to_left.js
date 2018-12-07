@@ -43,17 +43,53 @@ function swap(arr, idx1, idx2){
   arr[idx2] = tmp
 }
 
+// function shift(arr){
+//   const len = arr.length
+//   const q = new FixedSizeQueue(len)
+//   for(let i = 0; i < len; i++){
+//     if(arr[i] !== 0 && !q.isEmpty()){
+//       swap(arr, i, q.pop())
+//     } 
+    
+//     if(arr[i] === 0){
+//       q.push(i)
+//     }
+//   }
+//   return arr
+// }
+
+// function shift(arr){
+//   const len = arr.length
+//   let zeroes = 0, nonZeroes = 1
+//   while(nonZeroes < len && zeroes < len){
+//     if((arr[zeroes] === 0 && arr[nonZeroes] !== 0) && nonZeroes > zeroes){
+//       swap(arr, zeroes, nonZeroes)
+//       zeroes++
+//       nonZeroes++
+//     } else if(arr[zeroes] !== 0){
+//       zeroes++
+//     } else {
+//       nonZeroes++
+//     }
+//   }
+  
+//   return arr
+// }
+
 function shift(arr){
   const len = arr.length
-  const q = new FixedSizeQueue(len)
+  let count = 0
+
   for(let i = 0; i < len; i++){
-    if(arr[i] !== 0 && !q.isEmpty()){
-      swap(arr, i, q.pop())
-    } 
-    
-    if(arr[i] === 0){
-      q.push(i)
+    if(arr[i] !== 0){
+      arr[count] = arr[i]
+      count++
     }
+  }
+
+  while(count < len){
+    arr[count] = 0
+    count++
   }
   return arr
 }
