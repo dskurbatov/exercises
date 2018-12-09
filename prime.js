@@ -1,9 +1,11 @@
-function prime(num){
+function isPrime(num){
   if(num < 2){
     return false
   }
-  
-  for(let i = 2; i * i <= num; i++){
+  if(num === 2){
+    return true
+  }
+  for(let i = 3; i * i <= num; i+=2){
     if(num % i === 0){
       return false
     }
@@ -11,9 +13,9 @@ function prime(num){
   return true
 }
 
-console.log('3',prime(3))
-console.log('-5',prime(-5))
-console.log('5', prime(5))
-console.log('2',prime(2))
-console.log('4',prime(4))
-console.log('15',prime(15))
+console.log('3',isPrime(3))
+console.log('-5',isPrime(-5))
+console.log('5', isPrime(5))
+console.log('2',isPrime(2))
+console.log('4',isPrime(4))
+console.log('15',isPrime(15))
