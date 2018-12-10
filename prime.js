@@ -1,10 +1,8 @@
 function isPrime(num){
-  if(num < 2){
+  if(num < 2 || num % 2 == 0){
     return false
   }
-  if(num === 2){
-    return true
-  }
+
   for(let i = 3; i * i <= num; i+=2){
     if(num % i === 0){
       return false
