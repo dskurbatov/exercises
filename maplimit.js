@@ -54,7 +54,14 @@ function log(idx){
   }
 }
 
-mapLimit([], 2, powerOf2, log(1))
-mapLimit([1,2,"a",4,5], 2, powerOf2, log(2))
-mapLimit(["a",2,3,4,5], 2, powerOf2, log(3))
-mapLimit([1,2,3,4,5], 2, powerOf2, log(4))
+// mapLimit([], 2, powerOf2, log(1))
+// mapLimit([1,2,"a",4,5], 2, powerOf2, log(2))
+// mapLimit(["a",2,3,4,5], 2, powerOf2, log(3))
+// mapLimit([1,2,3,4,5], 2, powerOf2, log(4))
+
+function logging(){
+  console.log('Last')
+}
+console.log('Before')
+process.nextTick(logging)
+console.log('After')
